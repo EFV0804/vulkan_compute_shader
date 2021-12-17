@@ -13,7 +13,7 @@ VkComputeShader::~VkComputeShader()
 
 void VkComputeShader::load_compute_shader(VkRenderer* renderer)
 {
-    vector<char> shaderContent = readShaderFile("comp.spv");
+    vector<char> shaderContent = readShaderFile(fileName);
     shaderModule = renderer->createShader(shaderContent);
 }
 

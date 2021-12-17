@@ -32,7 +32,7 @@ int main() {
     initWindow();
     if (renderer.init(window) == EXIT_FAILURE) return EXIT_FAILURE;
 
-    const char* computeShaderFile = "comp.spv";
+    const char* computeShaderFile = "shaders/comp.spv";
     Simulation simulation = Simulation{ &renderer,computeShaderFile };
     simulation.init();
 

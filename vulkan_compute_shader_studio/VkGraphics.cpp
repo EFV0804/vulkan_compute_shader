@@ -318,6 +318,7 @@ void VkGraphics::createGraphicsPipeline(uint32_t stride, size_t offsetPos, size_
     graphicsPipelineCreateInfo.basePipelineHandle = VK_NULL_HANDLE;
     graphicsPipelineCreateInfo.basePipelineIndex = -1;
 
+
     vk::Result result = renderer->mainDevices.device.createGraphicsPipelines(VK_NULL_HANDLE, 1, &graphicsPipelineCreateInfo, nullptr, &graphicsPipeline);
     if (result != vk::Result::eSuccess)
     {
