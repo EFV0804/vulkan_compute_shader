@@ -32,3 +32,18 @@ The dependencies are included in the 'external' folder.
 - glm 0.9.9.8: C++ Math library based on GLSL
 - Vulkan SDK 1.2.198.1
 
+---
+**Credit/Resources:**
+- [A Simple Vulkan Compute Example in C++][1] by Baked Bits
+- [A simple Vulkan compute example][5] by Neil Henning
+- [Vulkan C++ examples and demos][2] by SaschaWillems
+- [Vulkan Guide][3]
+- [Vulkan Tutorial][6]
+- [Memory Management in Vulkan][4] by Jordan Logan
+
+[1]:https://bakedbits.dev/posts/vulkan-compute-example/
+[2]:https://github.com/SaschaWillems/Vulkan
+[3]:https://vkguide.dev/docs/gpudriven/compute_shaders/
+[4]:https://www.khronos.org/assets/uploads/developers/library/2018-vulkan-devday/03-Memory.pdf
+[5]:https://www.duskborn.com/posts/a-simple-vulkan-compute-example/
+[6]:https://vulkan-tutorial.com/
