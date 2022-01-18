@@ -41,8 +41,26 @@ void Simulation::init()
 void Simulation::run()
 {
 	compute.run(numElements);
+
+	//inBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(inBufferMemory, 0, bufferSize));
+	//outBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(outBufferMemory, 0, bufferSize));
+
+	//for (uint32_t i = 0; i < numElements; ++i) {
+	//	std::cout << inBufferPtr[i] << " ";
+	//}
+	//std::cout << std::endl;
+	//renderer->mainDevices.device.unmapMemory(inBufferMemory);
+
+	//for (uint32_t i = 0; i < numElements; ++i) {
+	//	std::cout << outBufferPtr[i] << " ";
+	//}
+	//std::cout << std::endl;
+	//renderer->mainDevices.device.unmapMemory(outBufferMemory);
+
+
+
 	graphics.draw();
-	//updateBuffers(); //breaks
+	updateBuffers(); //breaks
 }
 
 void Simulation::close()
@@ -133,14 +151,73 @@ void Simulation::bindBuffers()
 void Simulation::populateInBuffer()
 {
 	
-	inBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(inBufferMemory, 0,bufferSize));
+	auto inBufferPtr = static_cast<float*>(renderer->mainDevices.device.mapMemory(inBufferMemory, 0,bufferSize));
+
+	//struct MyStruct
+	//{
+	//	glm::vec3 testVec = { 0,1,2 };
+
+	//} testStruct;
+
+	//memcpy(inBufferPtr, &testStruct.testVec, sizeof(testStruct.testVec));
+
+
+
+	//std::cout << sizeof(testStruct) << std::endl;
+	//std::cout << sizeof(testStruct.testVec) << std::endl;
+	//std::cout << sizeof(testStruct.testVec[0]) << std::endl;
+	//std::cout << sizeof(uint32_t) << std::endl;
+
+	//std::cout << "Struct adress " << &testStruct << std::endl;
+	//std::cout << "Vector adress " << &testStruct.testVec << std::endl;
+	//std::cout << "Vector x adress " << &testStruct.testVec[0] << " value = " << &testStruct.testVec[0] << std::endl;
+	//std::cout << "Vector y adress " << &testStruct.testVec[1] << " value = " << &testStruct.testVec[1] << std::endl;
+	//std::cout << "Vector z adress " << &testStruct.testVec[2] << " value = " << &testStruct.testVec[2] << std::endl;
+	//std::cout << "buffer adress " << inBufferPtr << " value = " << *inBufferPtr << std::endl;
+
+	//for (uint32_t i = 0; i < 3; ++i) {
+	//	std::cout << inBufferPtr[i] << " " << "adress is " << &inBufferPtr[i]<< std::endl;
+
+	//}
 
 	memcpy(inBufferPtr, vertices.data(), bufferSize);
+
+	std::cout << "Vertices size is " << sizeof(vertices) << std::endl;
+	std::cout << "Vertex size is " << sizeof(Vertex) << std::endl;
+	std::cout << "GLM vec3 size is "<< sizeof(glm::vec3) << std::endl;
+	std::cout << "Buffer size is " << bufferSize << std::endl;
+
+	for (uint32_t i = 0; i < 32; ++i) {
+		std::cout << inBufferPtr[i] << " ";
+	}
+
+	//for (uint32_t i = 0; i < numElements; ++i) {
+
+
+	//	std::cout << "element " << i << std::endl;
+
+	//	for (uint32_t j = 0; j < 2; ++j) {
+
+	//		std::cout << "vector " << j << std::endl;
+	//		for (uint32_t k = 0; k < 3; ++k) {
+
+	//			std::cout << inBufferPtr[k] << " ";
+	//		}
+	//		std::cout << std::endl;
+	//	}
+	//	std::cout << std::endl;
+	//}
+
+	std::cout << std::endl;
 	renderer->mainDevices.device.unmapMemory(inBufferMemory);
 
 
-	vertexBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(vertexBufferMemory, 0, bufferSize));
+	auto vertexBufferPtr = static_cast<float*>(renderer->mainDevices.device.mapMemory(vertexBufferMemory, 0, bufferSize));
 	memcpy(vertexBufferPtr, inBufferPtr, bufferSize);
+	for (uint32_t i = 0; i < 32; ++i) {
+		std::cout << vertexBufferPtr[i] << " ";
+	}
+	std::cout << std::endl;
 	renderer->mainDevices.device.unmapMemory(vertexBufferMemory);
 
 }
@@ -153,10 +230,16 @@ vk::DescriptorBufferInfo Simulation::getDescriptorBufferInfo(vk::Buffer buffer)
 
 void Simulation::updateBuffers()
 {
-	inBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(inBufferMemory, 0, bufferSize));
-	outBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(outBufferMemory, 0, bufferSize));
+	auto inBufferPtr = static_cast<float*>(renderer->mainDevices.device.mapMemory(inBufferMemory, 0, bufferSize));
+	auto outBufferPtr = static_cast<float*>(renderer->mainDevices.device.mapMemory(outBufferMemory, 0, bufferSize));
 	vertexBufferPtr = static_cast<int32_t*>(renderer->mainDevices.device.mapMemory(vertexBufferMemory, 0, bufferSize));
 
+	std::cout << "outBuffer current " ;
+
+	for (uint32_t i = 0; i < 32; ++i) {
+		std::cout << outBufferPtr[i] << " ";
+	}
+	std::cout << std::endl;
 	memcpy(inBufferPtr, outBufferPtr, bufferSize);
 	memcpy(vertexBufferPtr, inBufferPtr, bufferSize);
 

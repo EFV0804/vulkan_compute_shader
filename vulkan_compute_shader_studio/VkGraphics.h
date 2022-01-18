@@ -1,6 +1,6 @@
 #pragma once
 #include "VkRenderer.h"
-class Vertex;
+//class Vertex;
 
 class VkGraphics
 {

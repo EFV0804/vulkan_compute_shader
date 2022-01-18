@@ -3,7 +3,8 @@
 #include "VkGraphics.h"
 #include "VkCompute.h"
 #include <glm/glm.hpp>
-
+#include <array>
+#include <algorithm>
 class Simulation
 {
 public:
@@ -26,7 +27,6 @@ public:
 	{{0.4, 0.4, 0.0}, {0.0, 1.0, 0.0}},
 	{{-0.4, 0.4, 0.0}, {0.0, 0.0, 1.0}}
 	};
-
 private:
 
 	const char* shaderFileName;
@@ -54,6 +54,5 @@ private:
 	void populateInBuffer();
 	vk::DescriptorBufferInfo getDescriptorBufferInfo(vk::Buffer buffer);
 	void updateBuffers();
-	void printOut();
 };
 

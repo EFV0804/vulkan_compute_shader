@@ -139,4 +139,5 @@ void VkCompute::submitWork()
 	queuePtr->submit({ submitInfo }, fence);
 	renderer->mainDevices.device.waitForFences({ fence }, true, uint64_t(-1));
 	renderer->mainDevices.device.destroyFence(fence);
+
 }
