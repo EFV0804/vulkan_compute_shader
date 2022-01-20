@@ -38,14 +38,14 @@ private:
 
 	vk::Buffer inBuffer;
 	vk::DeviceMemory inBufferMemory;
-	int32_t* inBufferPtr = nullptr;
+	float* inBufferPtr = nullptr;
 	vk::Buffer outBuffer;
 	vk::DeviceMemory outBufferMemory;
-	int32_t* outBufferPtr = nullptr;
+	float* outBufferPtr = nullptr;
 
 	vk::Buffer vertexBuffer;
 	vk::DeviceMemory vertexBufferMemory;
-	int32_t* vertexBufferPtr = nullptr;
+	float* vertexBufferPtr = nullptr;
 
 	//init
 	void createBuffer();
